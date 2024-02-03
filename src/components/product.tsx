@@ -18,7 +18,10 @@ export function Product({ item }: ProductProps) {
   if (cart.includes(product)) {
    setCart((x: any) => x.filter((el: any) => el !== product));
   } else {
-   setCart((x: IProduct[]) => [product, ...x]);
+   setCart((x: IProduct[]) => {
+    product.quantity = 1;
+    return [product, ...x];
+   });
   }
  };
 
