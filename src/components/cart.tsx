@@ -18,7 +18,11 @@ function Cart() {
 
  return (
   <>
-   <p className="text-[30px] font-700 text-center border-b-[1px] pb-[10px]">
+   <p
+    className={`text-[30px] font-700 text-center ${
+     !!total && 'border-b-[1px]'
+    } pb-[10px]`}
+   >
     Cart
    </p>
    <ul

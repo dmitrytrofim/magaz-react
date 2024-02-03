@@ -9,8 +9,8 @@ export function useProducts() {
 
  async function loadProducts() {
   try {
-   setLoadError('');
    setLoading(true);
+   setLoadError('');
    const response = await axios.get('https://fakestoreapi.com/products');
    setLoading(false);
    setProducts(response.data);
