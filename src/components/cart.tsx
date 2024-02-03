@@ -1,14 +1,18 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { CartContext } from '../components/cartContext';
 import { IProduct } from '../models';
 import ProductCart from './productInCart';
 
 function Cart() {
  const [cart, setCart] = useContext(CartContext);
- const total = cart.reduce(
-  (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
-  0
- );
+ let total: number = 0;
+
+ useMemo(() => {
+  total = cart.reduce(
+   (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
+   0
+  );
+ }, [cart]);
 
  const removeAll = () => {
   if (window.confirm('Are you sure?')) setCart([]);

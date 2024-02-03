@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { IProduct } from '../models';
 import { CartContext } from './cartContext';
 
@@ -6,19 +6,21 @@ function ProductCart({ el }: { el: IProduct }) {
  const [quantity, setQuantity] = useState<number>(1);
  const [, setCart] = useContext(CartContext);
 
- const changeQuantity = (product: IProduct) => {
-  setQuantity(quantity + 1);
+ const changeQuantity = () => {
+  setQuantity((x) => x + 1);
+ };
+
+ useEffect(() => {
   setCart((x: any) =>
    x.map((elem: IProduct) => {
-    if (elem === product) {
-     elem.quantity = 1 + quantity;
-     console.log(elem.quantity);
+    if (elem === el) {
+     elem.quantity = quantity;
      return elem;
     }
     return elem;
    })
   );
- };
+ }, [quantity]);
 
  return (
   <li className="flex flex-col items-center first:border-t-[1px] border-b-[1px] p-[10px_5px]">
@@ -38,7 +40,7 @@ function ProductCart({ el }: { el: IProduct }) {
     />
     <button
      className="w-[25px] h-[25px] border rounded-full bg-[url('./img/svg/plus-lg.svg')] bg-cover bg-[black]"
-     onClick={() => changeQuantity(el)}
+     onClick={() => changeQuantity()}
     ></button>
    </div>
   </li>
