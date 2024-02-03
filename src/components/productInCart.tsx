@@ -11,14 +11,13 @@ function ProductCart({ el }: { el: IProduct }) {
   setCart((x: any) =>
    x.map((elem: IProduct) => {
     if (elem === product) {
-     elem.quantity = quantity;
-     console.log(quantity);
+     elem.quantity = 1 + quantity;
+     console.log(elem.quantity);
      return elem;
     }
     return elem;
    })
   );
-  console.log(product);
  };
 
  return (

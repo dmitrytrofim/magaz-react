@@ -1,19 +1,14 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../components/cartContext';
 import { IProduct } from '../models';
 import ProductCart from './productInCart';
 
 function Cart() {
  const [cart, setCart] = useContext(CartContext);
- let total = 0;
-
- useMemo(() => {
-  total = cart.reduce(
-   (acc: number, cur: IProduct) => acc + cur.price * cur.quantity,
-   0
-  );
-  total = total.toFixed(2);
- }, [cart]);
+ const total = cart.reduce(
+  (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
+  0
+ );
 
  const removeAll = () => {
   if (window.confirm('Are you sure?')) setCart([]);
@@ -28,7 +23,7 @@ function Cart() {
     ))}
    </ul>
    <p className="text-[30px] font-700 text-center pt-[10px] px-[5px]">
-    TOTAL: <span className="text-[red]">{total}$</span>
+    TOTAL: <span className="text-[red]">{total.toFixed(2)}$</span>
    </p>
    <div className="flex justify-center p-[5px]">
     {!!total && (
