@@ -21,7 +21,7 @@ function Cart() {
  return (
   <>
    <p className="text-[30px] font-700 text-center">Cart</p>
-   <ul>
+   <ul className="h-[60vh] overflow-auto">
     {cart.map((el: IProduct) => (
      <ProductCart el={el} key={el.id} />
     ))}

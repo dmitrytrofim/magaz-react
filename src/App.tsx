@@ -14,15 +14,15 @@ export function App() {
    <main>
     <section>
      <Container>
-      <div className="relative grid grid-cols-[2fr,_300px] items-start gap-2">
-       <div className="grid grid-cols-2 gap-2 pb-10">
+      <div className="relative grid grid-cols-[2fr,_300px] items-start gap-2 pb-10">
+       <div className="grid grid-cols-2 gap-2">
         {loading && (
          <p className="text-[40px] text-center col-span-full">Loading...</p>
         )}
         {products &&
          products.map((item) => <Product key={item.id} item={item} />)}
        </div>
-       <div className="max-h-dvh border sticky top-0 py-[10px] overflow-auto">
+       <div className="border sticky top-0 py-[10px] overflow-hidden">
         <Cart />
        </div>
       </div>
