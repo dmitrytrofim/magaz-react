@@ -1,13 +1,19 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { CartContext } from '../components/cartContext';
 import { IProduct } from '../models';
+import ProductCart from './productInCart';
 
 function Cart() {
  const [cart, setCart] = useContext(CartContext);
- const total = cart.reduce(
-  (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
-  0
- );
+ let total = 0;
+
+ useMemo(() => {
+  total = cart.reduce(
+   (acc: number, cur: IProduct) => acc + cur.price * cur.quantity,
+   0
+  );
+  total = total.toFixed(2);
+ }, [cart]);
 
  const removeAll = () => {
   if (window.confirm('Are you sure?')) setCart([]);
@@ -18,31 +24,11 @@ function Cart() {
    <p className="text-[30px] font-700 text-center">Cart</p>
    <ul>
     {cart.map((el: IProduct) => (
-     <li
-      className="flex flex-col items-center first:border-t-[1px] border-b-[1px] p-[10px_5px]"
-      key={el.id}
-     >
-      <img
-       className="w-[100px] h-[100px] object-contain mb-[10px]"
-       src={el.image}
-       alt=""
-      />
-      <p className="text-center mb-[10px]">{el.title}</p>
-      <div className="flex items-center">
-       <button className="w-[25px] h-[25px] border rounded-full bg-[url('./img/svg/dash-lg.svg')] bg-cover bg-[black]"></button>
-       <input
-        className="grow-0 text-[20px] text-center w-[70px] p-0"
-        type="text"
-        value={1}
-        readOnly
-       />
-       <button className="w-[25px] h-[25px] border rounded-full bg-[url('./img/svg/plus-lg.svg')] bg-cover bg-[black]"></button>
-      </div>
-     </li>
+     <ProductCart el={el} key={el.id} />
     ))}
    </ul>
    <p className="text-[30px] font-700 text-center pt-[10px] px-[5px]">
-    TOTAL: <span className="text-[red]">{total.toFixed(2)}$</span>
+    TOTAL: <span className="text-[red]">{total}$</span>
    </p>
    <div className="flex justify-center p-[5px]">
     {!!total && (
