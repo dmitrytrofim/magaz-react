@@ -23,7 +23,7 @@ function ProductCart({ el }: { el: IProduct }) {
  }, [quantity]);
 
  return (
-  <li className="flex flex-col items-center first:border-t-[1px] border-b-[1px] p-[10px_5px]">
+  <li className="flex flex-col items-center last:border-b-0 border-b-[1px] border-[lightgray] p-[10px_5px]">
    <img
     className="w-[100px] h-[100px] object-contain mb-[10px]"
     src={el.image}

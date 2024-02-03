@@ -22,7 +22,7 @@ export function App() {
         {products &&
          products.map((item) => <Product key={item.id} item={item} />)}
        </div>
-       <div className="border sticky top-0 py-[10px] overflow-hidden">
+       <div className="border sticky top-2 py-[10px] overflow-hidden">
         <Cart />
        </div>
       </div>
