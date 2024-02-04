@@ -2,12 +2,13 @@ import './assets/index.css';
 import ReactDOM from 'react-dom/client';
 import { StrictMode } from 'react';
 import { App } from './App';
-import { CartProvider } from './components/cartContext';
+import store from './store';
+import { Provider } from 'react-redux';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
  <StrictMode>
-  <CartProvider>
+  <Provider store={store}>
    <App />
-  </CartProvider>
+  </Provider>
  </StrictMode>
 );

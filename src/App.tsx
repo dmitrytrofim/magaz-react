@@ -3,7 +3,7 @@ import Header from './components/header';
 import Footer from './components/footer';
 import { Product } from './components/product';
 import { useProducts } from './assets/hooks/useProducts';
-import Cart from './components/cart';
+// import Cart from './components/cart';
 
 export function App() {
  const { products, loading } = useProducts();
@@ -20,10 +20,10 @@ export function App() {
          <p className="text-[40px] text-center col-span-full">Loading...</p>
         )}
         {products &&
-         products.map((item) => <Product key={item.id} item={item} />)}
+         products.map((item: any) => <Product key={item.id} item={item} />)}
        </div>
        <div className="border sticky top-2 py-[10px] overflow-hidden">
-        <Cart />
+        {/* <Cart /> */}
        </div>
       </div>
      </Container>

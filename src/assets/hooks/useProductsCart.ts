@@ -14,7 +14,7 @@ export function useProductsCart({ el }: { el: IProduct }) {
     return quantity - 1;
    }
    default:
-    throw new Error('Quantity is incorrect.');
+    throw new Error('Quantity incorrect.');
   }
  }
 
