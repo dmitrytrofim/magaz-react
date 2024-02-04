@@ -1,7 +1,7 @@
 import useProductsCart from '../assets/hooks/useProductsCart';
 import { IProduct } from '../models';
 
-function ProductCart({ el }: { el: IProduct }) {
+function ProductInCart({ el }: { el: IProduct }) {
  const { quantity, dispatch } = useProductsCart({ el });
 
  return (
@@ -32,4 +32,4 @@ function ProductCart({ el }: { el: IProduct }) {
  );
 }
 
-export default ProductCart;
+export default ProductInCart;

@@ -1,9 +1,9 @@
-import { useReducer, useContext, useEffect } from 'react';
-import { CartContext } from '../../components/cartContext';
+import { useReducer, useEffect } from 'react';
+// import { CartContext } from '../../components/cartContext';
 import { IProduct } from '../../models';
 
 export function useProductsCart({ el }: { el: IProduct }) {
- const [, setCart] = useContext(CartContext);
+ // const [, setCart] = useContext(CartContext);
  const [quantity, dispatch] = useReducer(reducer, 1);
 
  function reducer(quantity: any, action: any) {
@@ -18,21 +18,21 @@ export function useProductsCart({ el }: { el: IProduct }) {
   }
  }
 
- useEffect(() => {
-  if (quantity < 1) {
-   setCart((x: any) => x.filter((elem: any) => elem !== el));
-   return;
-  }
-  setCart((x: any) =>
-   x.map((elem: IProduct) => {
-    if (elem === el) {
-     elem.quantity = quantity;
-     return elem;
-    }
-    return elem;
-   })
-  );
- }, [quantity]);
+ // useEffect(() => {
+ //  if (quantity < 1) {
+ //   setCart((x: any) => x.filter((elem: any) => elem !== el));
+ //   return;
+ //  }
+ //  setCart((x: any) =>
+ //   x.map((elem: IProduct) => {
+ //    if (elem === el) {
+ //     elem.quantity = quantity;
+ //     return elem;
+ //    }
+ //    return elem;
+ //   })
+ //  );
+ // }, [quantity]);
 
  return { quantity, dispatch };
 }

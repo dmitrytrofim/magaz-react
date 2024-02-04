@@ -1,10 +1,11 @@
-import { useContext, useMemo } from 'react';
-import { CartContext } from '../components/cartContext';
+import { useMemo } from 'react';
 import { IProduct } from '../models';
-import ProductCart from './productInCart';
+import ProductInCart from './productInCart';
+import { useSelector } from 'react-redux';
 
 function Cart() {
- const [cart, setCart] = useContext(CartContext);
+ const cart = useSelector((state: any) => state.cart.value);
+
  const total = useMemo(() => {
   return cart.reduce(
    (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
@@ -12,9 +13,9 @@ function Cart() {
   );
  }, [cart]);
 
- const removeAll = () => {
-  if (window.confirm('Are you sure?')) setCart([]);
- };
+ // const removeAll = () => {
+ //  if (window.confirm('Are you sure?')) setCart([]);
+ // };
 
  return (
   <>
@@ -31,7 +32,7 @@ function Cart() {
     }  overflow-auto`}
    >
     {cart.map((el: IProduct) => (
-     <ProductCart el={el} key={el.id} />
+     <ProductInCart el={el} key={el.id} />
     ))}
    </ul>
    <p className="text-[30px] font-700 text-center border-t-[1px] pt-[10px] px-[5px]">
@@ -42,7 +43,7 @@ function Cart() {
      <button
       className="text-[red] border border-[red] rounded-[5px] p-[3px]"
       type="button"
-      onClick={removeAll}
+      // onClick={removeAll}
      >
       Remove ALL
      </button>

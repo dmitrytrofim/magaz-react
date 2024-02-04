@@ -1,6 +1,7 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { IProduct } from '../models';
-import { CartContext } from './cartContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCart } from '../store/features/cartSlice';
 
 interface ProductProps {
  item: IProduct;
@@ -8,7 +9,8 @@ interface ProductProps {
 
 export function Product({ item }: ProductProps) {
  const [details, setDetails] = useState<Boolean>(false);
- const [cart, setCart] = useContext(CartContext);
+ const cart = useSelector((state: any) => state.cart.value);
+ const dispatch = useDispatch();
 
  const showDetails = () => {
   setDetails((details) => !details);
@@ -16,14 +18,15 @@ export function Product({ item }: ProductProps) {
 
  const addToCartAndRemove = (product: IProduct) => {
   if (cart.includes(product)) {
-   setCart((x: any) => x.filter((el: any) => el !== product));
+   // dispatch(setCart((x: any) => x.filter((el: any) => el !== product)));
   } else {
-   setCart((x: IProduct[]) => {
-    product.quantity = 1;
-    return [product, ...x];
-   });
+   dispatch(setCart(product));
   }
  };
+ // setCart((x: IProduct[]) => {
+ //  product.quantity = 1;
+ //  return [product, ...x];
+ // })
 
  return (
   <div className="flex flex-col border rounded-[5px] p-5" key={item.id}>
@@ -38,7 +41,7 @@ export function Product({ item }: ProductProps) {
    <p className="self-center text-[24px] mb-[15px]">
     Cost: <span className="font-700 text-[red]">{item.price}$</span>
    </p>
-   {/* <button
+   <button
     className={`border self-center px-3 py-1 rounded-[10px] text-[white] mb-[10px] ${
      cart.includes(item) ? 'bg-[black]' : 'bg-[red]'
     }`}
@@ -46,7 +49,7 @@ export function Product({ item }: ProductProps) {
     onClick={() => addToCartAndRemove(item)}
    >
     {cart.includes(item) ? 'Remove' : 'Add to cart'}
-   </button> */}
+   </button>
    <button
     className={`border self-center px-3 py-1 rounded-[10px] ${
      details ? 'text-[black] mb-[10px]' : 'text-[blue]'
