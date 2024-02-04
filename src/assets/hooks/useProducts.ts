@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 export function useProducts() {
  // const [products, setProducts] = useState<IProduct[]>([]);
- const products = useSelector((state: any) => state.products);
+ const products = useSelector((state: any) => state.products.value);
  const dispatch = useDispatch();
  const [loading, setLoading] = useState<boolean>(true);
  const [loadError, setLoadError] = useState<string>('');
@@ -18,6 +18,7 @@ export function useProducts() {
    const response = await axios.get('https://fakestoreapi.com/products');
    setLoading(false);
    dispatch(setProducts(response.data));
+   console.log(products);
   } catch (error: any) {
    console.error(new Error(error.message));
    setLoadError('Sorry, the store is broken!');
