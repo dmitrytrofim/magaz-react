@@ -1,10 +1,12 @@
 import { useMemo } from 'react';
 import { IProduct } from '../models';
 import ProductInCart from './productInCart';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeAll } from '../store/features/cartSlice';
 
 function Cart() {
  const cart = useSelector((state: any) => state.cart.value);
+ const dispatch = useDispatch();
 
  const total = useMemo(() => {
   return cart.reduce(
@@ -13,9 +15,9 @@ function Cart() {
   );
  }, [cart]);
 
- // const removeAll = () => {
- //  if (window.confirm('Are you sure?')) setCart([]);
- // };
+ const removeAllProducts = () => {
+  if (window.confirm('Are you sure?')) dispatch(removeAll());
+ };
 
  return (
   <>
@@ -43,7 +45,7 @@ function Cart() {
      <button
       className="text-[red] border border-[red] rounded-[5px] p-[3px]"
       type="button"
-      // onClick={removeAll}
+      onClick={removeAllProducts}
      >
       Remove ALL
      </button>

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IProduct } from '../models';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCart } from '../store/features/cartSlice';
+import { removeCart, setCart } from '../store/features/cartSlice';
 
 interface ProductProps {
  item: IProduct;
@@ -11,22 +11,20 @@ export function Product({ item }: ProductProps) {
  const [details, setDetails] = useState<Boolean>(false);
  const cart = useSelector((state: any) => state.cart.value);
  const dispatch = useDispatch();
+ const check = (elm: any) => cart.find((el: any) => el.id === elm.id);
 
  const showDetails = () => {
   setDetails((details) => !details);
  };
 
  const addToCartAndRemove = (product: IProduct) => {
-  if (cart.includes(product)) {
+  if (check(product)) {
+   dispatch(removeCart({ product }));
    // dispatch(setCart((x: any) => x.filter((el: any) => el !== product)));
   } else {
-   dispatch(setCart(product));
+   dispatch(setCart({ product }));
   }
  };
- // setCart((x: IProduct[]) => {
- //  product.quantity = 1;
- //  return [product, ...x];
- // })
 
  return (
   <div className="flex flex-col border rounded-[5px] p-5" key={item.id}>
@@ -43,12 +41,12 @@ export function Product({ item }: ProductProps) {
    </p>
    <button
     className={`border self-center px-3 py-1 rounded-[10px] text-[white] mb-[10px] ${
-     cart.includes(item) ? 'bg-[black]' : 'bg-[red]'
+     check(item) ? 'bg-[black]' : 'bg-[red]'
     }`}
     type="button"
     onClick={() => addToCartAndRemove(item)}
    >
-    {cart.includes(item) ? 'Remove' : 'Add to cart'}
+    {check(item) ? 'Remove' : 'Add to cart'}
    </button>
    <button
     className={`border self-center px-3 py-1 rounded-[10px] ${

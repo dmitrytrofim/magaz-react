@@ -8,16 +8,31 @@ export const cartSlice = createSlice({
  },
  reducers: {
   setCart: (state, { payload }: PayloadAction<any>) => {
-   let newProduct = { ...payload };
+   let newProduct = { ...payload.product };
    newProduct.quantity = 1;
    state.value = [newProduct as never, ...state.value];
   },
-  quantityIncrement: (state: any, { payload }: PayloadAction<any>) => {
-   state.value = [payload, ...state.value];
-   console.log(state.value);
+  removeCart: (state, { payload }: PayloadAction<any>) => {
+   if (payload.el) {
+    state.value = state.value.filter((el: any) => el.id !== payload.el.id);
+    return;
+   }
+   state.value = state.value.filter((el: any) => el.id !== payload.product.id);
+  },
+  setQuantity: (state: any, { payload }: PayloadAction<any>) => {
+   state.value.map((prod: any) => {
+    if (prod.id === payload.el.id) {
+     return (prod.quantity = payload.quantity);
+    }
+    return prod;
+   });
+  },
+  removeAll: (state) => {
+   state.value = [];
   },
  },
 });
 
-export const { setCart, quantityIncrement } = cartSlice.actions;
+export const { setCart, removeCart, setQuantity, removeAll } =
+ cartSlice.actions;
 export default cartSlice.reducer;
