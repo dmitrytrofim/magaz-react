@@ -1,14 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
-const initialState: Array<Object> = [];
+const initialState = {
+ value: [],
+};
 
 export const productsSlice = createSlice({
  name: 'products',
  initialState,
  reducers: {
   setProducts: (state, action: PayloadAction<any>) => {
-   state = action.payload;
+   state.value = action.payload;
   },
  },
 });
