@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useLayoutEffect } from 'react';
 import axios from 'axios';
 import { setProducts } from '../../store/features/productsSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +22,7 @@ export function useProducts() {
   }
  }
 
- useEffect(() => {
+ useLayoutEffect(() => {
   loadProducts();
  }, []);
 
