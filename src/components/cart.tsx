@@ -1,18 +1,24 @@
-import { useMemo } from 'react';
+import { useEffect } from 'react';
 import { IProduct } from '../models';
 import ProductInCart from './productInCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAll } from '../store/features/cartSlice';
 import { togglePopup } from '../store/features/popupSlice';
+import { summaTotal } from '../store/features/totalSlice';
 
 function Cart() {
  const cart = useSelector((state: any) => state.cart.value);
+ const total = useSelector((state: any) => state.total.value);
  const dispatch = useDispatch();
 
- const total = useMemo(() => {
-  return cart.reduce(
-   (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
-   0
+ useEffect(() => {
+  dispatch(
+   summaTotal(
+    cart.reduce(
+     (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
+     0
+    )
+   )
   );
  }, [cart]);
 

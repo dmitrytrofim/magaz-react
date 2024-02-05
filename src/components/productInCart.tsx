@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { IProduct } from '../models';
 import { setQuantity, removeCart } from '../store/features/cartSlice';
-import { useLayoutEffect, useReducer } from 'react';
+import { useEffect, useReducer } from 'react';
 
 function ProductInCart({ el }: { el: IProduct }) {
  const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function ProductInCart({ el }: { el: IProduct }) {
   }
  }
 
- useLayoutEffect(() => {
+ useEffect(() => {
   if (quantity < 1) dispatch(removeCart({ el }));
   dispatch(setQuantity({ el, quantity }));
  }, [quantity]);
