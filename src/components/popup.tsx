@@ -43,7 +43,7 @@ function PopupOrder() {
      {cart &&
       cart.map((el: IProduct) => (
        <li className="flex items-center gap-[10px]" key={el.id}>
-        <img className="w-[30px] h-[30px]" src={el.image} alt="" />
+        <img className="shrink-0 w-[30px] h-[30px]" src={el.image} alt="" />
         <p className="w-[150px] text-[12px]">{el.title}</p>
         <span>&#10799;</span>
         <span>{el?.quantity}</span>
