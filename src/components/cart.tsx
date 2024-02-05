@@ -3,6 +3,7 @@ import { IProduct } from '../models';
 import ProductInCart from './productInCart';
 import { useDispatch, useSelector } from 'react-redux';
 import { removeAll } from '../store/features/cartSlice';
+import { togglePopup } from '../store/features/popupSlice';
 
 function Cart() {
  const cart = useSelector((state: any) => state.cart.value);
@@ -40,10 +41,19 @@ function Cart() {
    <p className="text-[30px] font-700 text-center border-t-[1px] pt-[10px] px-[5px]">
     TOTAL: <span className="text-[red]">{total.toFixed(2)}$</span>
    </p>
-   <div className="flex justify-center p-[5px]">
+   <div className="flex justify-center gap-[10px] p-[5px]">
     {!!total && (
      <button
-      className="text-[red] border border-[red] rounded-[5px] p-[3px]"
+      className="text-[white] border border-[green] bg-[green] rounded-[5px] py-[3px] px-[8px]"
+      type="button"
+      onClick={() => dispatch(togglePopup())}
+     >
+      ORDER
+     </button>
+    )}
+    {!!total && (
+     <button
+      className="text-[red] border border-[red] rounded-[5px] py-[3px] px-[8px]"
       type="button"
       onClick={removeAllProducts}
      >

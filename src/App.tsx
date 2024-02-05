@@ -4,6 +4,7 @@ import Footer from './components/footer';
 import { Product } from './components/product';
 import { useProducts } from './assets/hooks/useProducts';
 import Cart from './components/cart';
+import PopupOrder from './components/popup';
 
 export function App() {
  const { products, loading } = useProducts();
@@ -29,6 +30,7 @@ export function App() {
      </Container>
     </section>
    </main>
+   <PopupOrder />
    <Footer />
   </Wrapper>
  );
