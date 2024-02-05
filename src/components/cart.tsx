@@ -12,14 +12,11 @@ function Cart() {
  const dispatch = useDispatch();
 
  useEffect(() => {
-  dispatch(
-   summaTotal(
-    cart.reduce(
-     (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
-     0
-    )
-   )
+  let summa = cart.reduce(
+   (acc: number, cur: IProduct) => acc + cur.price * (cur.quantity || 1),
+   0
   );
+  dispatch(summaTotal(summa.toFixed(2)));
  }, [cart]);
 
  const removeAllProducts = () => {
@@ -30,7 +27,7 @@ function Cart() {
   <>
    <p
     className={`text-[30px] font-700 text-center ${
-     !!total && 'border-b-[1px]'
+     cart.length > 0 && 'border-b-[1px]'
     } pb-[10px]`}
    >
     Cart
@@ -45,9 +42,9 @@ function Cart() {
     ))}
    </ul>
    <p className="text-[30px] font-700 text-center border-t-[1px] pt-[10px] px-[5px]">
-    TOTAL: <span className="text-[red]">{total.toFixed(2)}$</span>
+    TOTAL: <span className="text-[red]">{total}$</span>
    </p>
-   {!!total && (
+   {cart.length > 0 && (
     <div className="flex justify-center gap-[10px] p-[5px]">
      <button
       className="text-[white] border border-[green] bg-[green] rounded-[5px] py-[3px] px-[8px]"

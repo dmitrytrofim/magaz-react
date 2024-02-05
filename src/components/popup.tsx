@@ -48,7 +48,7 @@ function PopupOrder() {
         <span>&#10799;</span>
         <span>{el?.quantity}</span>
         <span>=</span>
-        <span>{(el?.quantity || 1) * el.price}$</span>
+        <span>{((el?.quantity || 1) * el.price).toFixed(2)}$</span>
         <input
          type="hidden"
          name={`product${el.id}`}
@@ -59,7 +59,7 @@ function PopupOrder() {
     </ul>
     <div className="flex justify-between items-center">
      <p className="text-[20px] font-500">
-      Total: <span className="text-[red]">{total.toFixed(2)}$</span>
+      Total: <span className="text-[red]">{total}$</span>
      </p>
      <button
       type="button"
