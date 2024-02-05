@@ -47,8 +47,8 @@ function Cart() {
    <p className="text-[30px] font-700 text-center border-t-[1px] pt-[10px] px-[5px]">
     TOTAL: <span className="text-[red]">{total.toFixed(2)}$</span>
    </p>
-   <div className="flex justify-center gap-[10px] p-[5px]">
-    {!!total && (
+   {!!total && (
+    <div className="flex justify-center gap-[10px] p-[5px]">
      <button
       className="text-[white] border border-[green] bg-[green] rounded-[5px] py-[3px] px-[8px]"
       type="button"
@@ -56,8 +56,6 @@ function Cart() {
      >
       ORDER
      </button>
-    )}
-    {!!total && (
      <button
       className="text-[red] border border-[red] rounded-[5px] py-[3px] px-[8px]"
       type="button"
@@ -65,8 +63,8 @@ function Cart() {
      >
       Remove ALL
      </button>
-    )}
-   </div>
+    </div>
+   )}
   </>
  );
 }
